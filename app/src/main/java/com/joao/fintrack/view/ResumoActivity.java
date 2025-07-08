@@ -1,7 +1,9 @@
 package com.joao.fintrack.view;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -18,8 +20,9 @@ public class ResumoActivity extends Activity {
     private ListView listResumo;
     private DespesaController controller;
     private ArrayList<String> listaResumo;
-    private ArrayList<String> categoriasResumo; // Para deletar por categoria
+    private ArrayList<String> categoriasResumo;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +30,10 @@ public class ResumoActivity extends Activity {
 
         listResumo = findViewById(R.id.listResumo);
         controller = new DespesaController(this);
+
+        findViewById(R.id.btnVoltar).setOnClickListener(v -> {
+            startActivity(new Intent(this, MainActivity.class));
+        });
 
         carregarResumo();
 

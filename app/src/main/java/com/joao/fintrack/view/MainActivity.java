@@ -35,6 +35,11 @@ public class MainActivity extends Activity {
             startActivity(new Intent(this, EditActivity.class));
         });
 
+        findViewById(R.id.btnResumo).setOnClickListener(v -> {
+            startActivity(new Intent(this, ResumoActivity.class));
+        });
+
+
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             Despesa d = lista.get(i);
             Intent it = new Intent(this, EditActivity.class);
