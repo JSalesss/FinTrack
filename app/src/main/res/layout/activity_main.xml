@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#009688"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/logo"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="Logo do app"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/textResumo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resumo Mensal: R$0,00"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:paddingBottom="8dp"/>
+
+    <Button
+        android:id="@+id/btnAdicionar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Adicionar Despesa"
+        android:backgroundTint="#03DAC5"
+        android:textColor="#000000"/>
+
+    <ListView
+        android:id="@+id/listDespesas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#555555"
+        android:divider="@color/material_dynamic_neutral50"
+        android:dividerHeight="1dp"
+        android:textColor="#FFFFFF"/>
+
+</LinearLayout>
