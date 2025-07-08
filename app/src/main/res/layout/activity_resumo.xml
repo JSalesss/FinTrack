@@ -24,13 +24,24 @@
         android:gravity="center"
         android:layout_marginBottom="16dp" />
 
+    <Button
+        android:id="@+id/btnVoltar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#03DAC5"
+        android:text="Voltar"
+        android:textColor="#000000" />
+
     <ListView
         android:id="@+id/listResumo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#555555"
+        android:background="#00FFE7"
         android:divider="@color/material_dynamic_neutral40"
         android:dividerHeight="1dp"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF" />
+
 
 </LinearLayout>
