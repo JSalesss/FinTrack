@@ -7,54 +7,66 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.joao.fintrack.R;
 import com.joao.fintrack.controller.DespesaController;
+import com.joao.fintrack.controller.ReceitaController;
 import com.joao.fintrack.model.Despesa;
 
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
-    private ListView listView;
-    private TextView textResumo;
-    private DespesaController controller;
-    private ArrayList<Despesa> lista;
-    private ArrayList<String> nomes;
+    private ListView listViewDespesas;
+    private TextView textSaldo;
+    private DespesaController despesaController;
+    private ReceitaController receitaController;
+    private ArrayList<Despesa> listaDespesas;
+    private ArrayList<String> nomesDespesas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listView = findViewById(R.id.listDespesas);
-        textResumo = findViewById(R.id.textResumo);
-        controller = new DespesaController(this);
+        listViewDespesas = findViewById(R.id.listDespesas);
+        textSaldo = findViewById(R.id.textResumo);
+
+        despesaController = new DespesaController(this);
+        receitaController = new ReceitaController(this);
+
 
         findViewById(R.id.btnAdicionar).setOnClickListener(v -> {
             startActivity(new Intent(this, EditActivity.class));
         });
+
+
+        findViewById(R.id.btnAdicionarReceita).setOnClickListener(v -> {
+            startActivity(new Intent(this, AddReceitaActivity.class));
+        });
+
 
         findViewById(R.id.btnResumo).setOnClickListener(v -> {
             startActivity(new Intent(this, ResumoActivity.class));
         });
 
 
-        listView.setOnItemClickListener((adapterView, view, i, l) -> {
-            Despesa d = lista.get(i);
+        listViewDespesas.setOnItemClickListener((adapterView, view, i, l) -> {
+            Despesa d = listaDespesas.get(i);
             Intent it = new Intent(this, EditActivity.class);
             it.putExtra("id", d.getId());
             startActivity(it);
         });
 
-        listView.setOnItemLongClickListener((adapterView, view, i, l) -> {
-            Despesa d = lista.get(i);
+
+        listViewDespesas.setOnItemLongClickListener((adapterView, view, i, l) -> {
+            Despesa d = listaDespesas.get(i);
             new AlertDialog.Builder(this)
                     .setTitle("Remover Despesa")
                     .setMessage("Deseja remover a despesa \"" + d.getCategoria() + "\" no valor de R$" + d.getValor() + "?")
                     .setPositiveButton("Sim", (dialog, which) -> {
-                        controller.deletar(d.getId());
+                        despesaController.deletar(d.getId());
                         carregarLista();
+                        atualizarSaldo();
                     })
                     .setNegativeButton("Cancelar", null)
                     .show();
@@ -66,21 +78,29 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         carregarLista();
+        atualizarSaldo();
     }
 
-    private void carregarLista() {
-        lista = controller.listar();
-        nomes = new ArrayList<>();
-        double total = 0;
 
-        for (Despesa d : lista) {
-            nomes.add(d.getCategoria() + " - R$ " + String.format("%.2f", d.getValor()) + " (" + d.getData() + ")");
-            total += d.getValor();
+    private void carregarLista() {
+        listaDespesas = despesaController.listar();
+        nomesDespesas = new ArrayList<>();
+        for (Despesa d : listaDespesas) {
+            nomesDespesas.add(d.getCategoria() + " - R$ " + String.format("%.2f", d.getValor()) + " (" + d.getData() + ")");
         }
 
-        textResumo.setText("Resumo Mensal: R$" + String.format("%.2f", total));
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nomesDespesas);
+        listViewDespesas.setAdapter(adapter);
+    }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nomes);
-        listView.setAdapter(adapter);
+
+    private void atualizarSaldo() {
+        double totalReceitas = receitaController.totalReceitas();
+        double totalDespesas = 0;
+        for (Despesa d : despesaController.listar()) {
+            totalDespesas += d.getValor();
+        }
+        double saldo = totalReceitas - totalDespesas;
+        textSaldo.setText("Saldo: R$ " + String.format("%.2f", saldo));
     }
 }

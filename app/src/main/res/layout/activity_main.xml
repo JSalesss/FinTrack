@@ -1,55 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="#009688"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fintrackmain"
     android:padding="16dp">
-
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/logo"
-        android:layout_gravity="center_horizontal"
-        android:contentDescription="Logo do app"
-        android:layout_marginBottom="16dp"/>
 
     <TextView
         android:id="@+id/textResumo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Resumo Mensal: R$0,00"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
+        android:layout_width="129dp"
+        android:layout_height="33dp"
         android:gravity="center"
-        android:paddingBottom="8dp"/>
+        android:text="Saldo: R$0,00"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.012"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.051" />
+
+    <Button
+        android:id="@+id/btnResumo"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#000000"
+        android:text="Resumo por Categoria"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnAdicionar"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textResumo"
+        app:layout_constraintVertical_bias="0.082" />
 
     <Button
         android:id="@+id/btnAdicionar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#000000"
         android:text="Adicionar Despesa"
-        android:backgroundTint="#03DAC5"
-        android:textColor="#000000"/>
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnAdicionarReceita"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btnResumo"
+        app:layout_constraintTop_toBottomOf="@id/textResumo"
+        app:layout_constraintVertical_bias="0.082" />
+
     <Button
-        android:id="@+id/btnResumo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Resumo por Categoria"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#03DAC5"
-        android:textColor="#000000"/>
+        android:id="@+id/btnAdicionarReceita"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="#000000"
+        android:text="Adicionar Receita"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/btnAdicionar"
+        app:layout_constraintTop_toBottomOf="@id/textResumo"
+        app:layout_constraintVertical_bias="0.082" />
 
     <ListView
         android:id="@+id/listDespesas"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#00FFE7"
-        android:divider="@color/material_dynamic_neutral50"
+        android:clipToPadding="false"
+        android:divider="#000000"
         android:dividerHeight="1dp"
-        android:textColor="#FFFFFF" />
+        android:paddingTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnResumo"
+        app:layout_constraintVertical_bias="1.0" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

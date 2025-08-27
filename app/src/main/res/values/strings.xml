@@ -2,4 +2,8 @@
     <string name="app_name">FinTrack</string>
     <string name="FinTrack_TxT">FinTrack</string>
     <string name="Slogan_TxT">Gestão financeira</string>
+    <string name="voltar">Voltar</string>
+    <string name="salvar_receita">Salvar Receita</string>
+    <string name="valor_da_receita">Valor da Receita</string>
+    <string name="data_dd_mm_yyyy">Data (dd/MM/yyyy)</string>
 </resources>
